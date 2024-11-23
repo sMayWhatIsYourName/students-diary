@@ -1,9 +1,10 @@
 import { Button, Input, Typography } from "antd";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { updateStudent } from "../api/students";
+import { IStudent } from "../types";
 
 interface ITableGrade {
-  chosenStudentItem: any;
+  chosenStudentItem: IStudent;
 }
 
 
@@ -11,7 +12,7 @@ export const TableGrade = ({ chosenStudentItem }: ITableGrade): JSX.Element => {
   const chosenStudentId = useRef(chosenStudentItem.id);
   const monthsOfYear = ['Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь', 'Январь', 'Февраль', 'Март', 'Апрель', 'Май'];
   const subjects = ['Математика', 'Информатика', 'Физкультура', 'История', 'Обществознание', 'География', 'Труд', 'Русский язык', 'Литература'];
-  const months = JSON.parse(chosenStudentItem.months);
+  const months: Array<Array<number | null>> = JSON.parse(chosenStudentItem.months);
   const monthState = useRef<Array<Array<number | null>>>(months);
 
   const handleMonthsState = (subject: number, month: number) => (value: string[]) => {
@@ -58,7 +59,7 @@ export const TableGrade = ({ chosenStudentItem }: ITableGrade): JSX.Element => {
         </thead>
         <tbody>
           {months.map((_arr, i) =>
-            <tr key={monthsOfYear[i]+chosenStudentItem.id}>
+            <tr key={monthsOfYear[i] + chosenStudentItem.id}>
               <th><Typography>{subjects[i]}</Typography></th>
               <td><Input.OTP onInput={handleMonthsState(i, 0)} value={`${months[i][0] || ''}`} length={1} /></td>
               <td><Input.OTP onInput={handleMonthsState(i, 1)} value={`${months[i][1] || ''}`} length={1} /></td>

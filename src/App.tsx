@@ -11,11 +11,20 @@ import { getUser } from './api/loginUser';
 import { fetchStudents } from './api/students';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { IStudent } from './types';
 
 function App() {
   const [user, setUser] = useState<IUserContext>(initialUserContext);
-  const [students, setStudents] = useState<Array<any>>([]);
+  const [students, setStudents] = useState<Array<IStudent>>([]);
   const navigate = useNavigate();
+
+  const handleUser = (user: IUserContext): void => {
+    setUser(user);
+  };
+
+  const handleStudents = (students: IStudent[]): void => {
+    setStudents(students);
+  };
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -47,7 +56,7 @@ function App() {
 
   useEffect(() => {
     const asyncFn = async () => {
-      const students = await fetchStudents(setStudents);
+      const students = await fetchStudents(handleStudents);
       setStudents(students);
     };
 
@@ -62,7 +71,7 @@ function App() {
             <Route index element={<IndexPage />} />
             <Route path="add" element={<AddStudent />} />
             <Route path="grades" element={<EditGrade students={students} />} />
-            <Route path="login" element={<LoginPage setUser={setUser} />} />
+            <Route path="login" element={<LoginPage setUser={handleUser} />} />
           </Route>
         </Routes>
       </UserContext.Provider>

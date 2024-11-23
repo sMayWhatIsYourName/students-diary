@@ -1,35 +1,10 @@
-import { Typography, Input, Select } from "antd";
-import { useEffect, useMemo, useState } from "react";
+import { Typography, Select } from "antd";
+import { useState } from "react";
 import { TableGrade } from "../components/TableGrade";
-
-interface IStudent {
-  id: string;
-  firstName: string;
-  secondName: string;
-  thirdName: string;
-  months: Array<Array<number | null>>;
-};
-
-
-const data: Array<IStudent> = [
-  // {
-  //   firstName: 'Степанов',
-  //   secondName: 'Дмитрий',
-  //   thirdName: 'Альбертович',
-  //   id: '228',
-  //   months: [[2, 4, null, 3, 4, 3, 2, 4, null], [3, 4, 5], [4], [], [2], [3], [], [5], [5]]
-  // },
-  // {
-  //   firstName: 'Канчурин',
-  //   secondName: 'Альберт',
-  //   thirdName: 'Альмирович',
-  //   id: '1337',
-  //   months: [[2], [], [4], [5], [2], [], [4], [5], [3]]
-  // },
-];
+import { IStudent } from "../types";
 
 interface IEditGrade {
-  students: Array<any>;
+  students: Array<IStudent>;
 }
 
 export const EditGrade = (props: IEditGrade): JSX.Element | null => {

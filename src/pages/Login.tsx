@@ -3,6 +3,7 @@ import { ReactElement, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { loginUser } from '../api/loginUser';
 import { toast } from 'react-toastify';
+import { IUserContext } from '../store/users';
 
 type FieldType = {
   username?: string;
@@ -10,7 +11,7 @@ type FieldType = {
 };
 
 interface ILoginPage {
-  setUser: (user: any) => void;
+  setUser: (user: IUserContext) => void;
 }
 
 export const LoginPage = (props: ILoginPage): ReactElement => {
