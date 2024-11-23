@@ -13,7 +13,7 @@ type FieldType = {
   passport: string;
   diary: string;
   specialization: string;
-  groupNumber: number;
+  groupNumber: string;
 };
 
 
